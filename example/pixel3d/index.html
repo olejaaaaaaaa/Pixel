@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta charset="utf-8" />
+    <title>Avokado</title>
+  </head>
+
+  <body id="main-body">
+
+    <script type="module">
+
+      import { 
+        default as wasm, main, 
+      } from "./pkg/pixel3d.js";
+
+      wasm().then((module) => { main(); });  
+
+    </script>
+  </body>
+</html>

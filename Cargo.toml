@@ -1,0 +1,37 @@
+[package]
+name = "pixel"
+version = "0.1.0"
+authors = ["oleja <olejav7@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+log = "*"
+rand = "*"
+wasm-bindgen = "0.2.84"
+image = { version = "*", features = ["png", "jpeg"]}
+winit = { version = "0.29", features = ["rwh_05"] }
+wgpu = { version = "22.0", features = ["webgl"]}
+console_error_panic_hook = { version = "0.1.7", optional = true }
+bytemuck = { version = "1.16", features = [ "derive" ] }
+web-sys = { version = "0.3.69", features = [
+  "Document",
+  "Window",
+  "Element",
+  'HtmlButtonElement',
+  'HtmlAudioElement',
+  'Window'
+]}
+getrandom = { version = "*", features = ["js"]}
+
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.34"
+
+[profile.release]
+opt-level = "s"
