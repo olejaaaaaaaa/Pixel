@@ -85,20 +85,32 @@ for i in 0..4 {
 }
 
 // Создаём камеру с итоговой матрицей
-let _max = Camera {
+let mut _max = Camera {
     matrix: final_rotation2,
 };
 
 
+let angle = 3f32;
+let rad = (3.14 * angle)/180.0;
+let mut vertex = vec![];
 
-player.add_mesh(vec![
-    
+for i in 0..360 {
+    vertex.push(Vertex3D{pos: [
+        (rad * i as f32).cos(),
+        (rad * i as f32).sin(),
+        0.0
+    ],  color: [(rad * i as f32).cos(), (rad * i as f32).sin(), (rad * i as f32).cos()]});
 
-], None);
+    vertex.push(Vertex3D{pos: [0.0, 0.0, 0.0], color: [(rad * i as f32).sin(), ((rad * i as f32).cos()), (rad * i as f32).sin()]});
+    vertex.push(Vertex3D{pos: [(rad * (i+1) as f32).cos(), (rad * (i+1) as f32).sin(), 0.0], color: [(rad * i as f32).cos(), (rad * i as f32).sin(), (rad * i as f32).cos()]});
+}
 
-    player.add_uniform(ShaderStages::VERTEX, _max);
+_max.matrix =c;
 
-    player.add_mesh_uniform_pipeline(PrimitiveTopology::LineStrip);
+player.add_mesh(vertex, None);
+player.add_shader_mesh_uniform();
+player.add_uniform(ShaderStages::VERTEX, _max);
+player.add_mesh_uniform_pipeline(PrimitiveTopology::TriangleStrip);
 
     main_loop.run(move |event, event_loop_window_target| {
 

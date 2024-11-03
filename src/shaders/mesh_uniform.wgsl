@@ -14,7 +14,7 @@ var<uniform> a: CameraUniform;
 fn vs_main(@location(0) inPos: vec3f,
            @location(1) inColor: vec3f) -> VSOut {
     var vsOut: VSOut;
-    vsOut.Position = vec4f(inPos, 1.0);
+    vsOut.Position = vec4f(inPos, 1.0) * a.view_proj;
     vsOut.color = inColor;
 
     return vsOut;
